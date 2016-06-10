@@ -170,7 +170,7 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                           >
                             <i class="icon-pencil icon-white"></i> Edit
                           </a>
-                          <a href="<?php echo BASE_URL."controller/control_product.php?delete_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default" >
+                          <a href="<?php echo BASE_URL."controller/control_product.php?delete_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default btn-delete" >
                             <i class="icon-pencil icon-white"></i> Delete
                           </a>
                         </td>

@@ -16,7 +16,7 @@ if (isset($_POST['submit']) && $_POST['submit']=='login') {
 	if (!$result_check) 
 	{
 		$type = 'warning';
-		$msg  = 'Email / Password Invalid';
+		$msg  = 'Email / Password Tidak Cocok !';
 		$page = '../pages/login.php';
 
 	}
@@ -29,13 +29,21 @@ if (isset($_POST['submit']) && $_POST['submit']=='login') {
 		$_SESSION['login']['first_name']= $result_check->first_name;
 		$_SESSION['login']['last_name'] = $result_check->last_name;
 		$type = 'success';			
-		$msg  = 'Welcome';
+		$msg  = 'Selamat datang';
 		$page = '../home.php';
 	}
 
 	set_alert($type, $msg);
 	safe_redirect($page);
 
+}
+
+if (isset($_GET['action']) && $_GET['action']=='logout_user')  {
+	
+	unset($_SESSION['login']);
+	$page = '../pages/login.php';
+	set_alert('success', 'Anda Telah Logout !');
+	safe_redirect($page);
 }
 
 ?>

@@ -9,7 +9,7 @@ unset($_SESSION['alert']);
 ?>
 	<div class="banner">
 		<div class="container">
-			<div class="banner-info animated wow zoomIn" data-wow-delay=".5s">
+			<div class="banner-info animated wow zoomIn hidden" data-wow-delay=".5s">
 				<h3>Free Online Shopping</h3>
 				<h4>Up to <span>50% <i>Off/-</i></span></h4>
 				<div class="wmuSlider example1">
@@ -46,7 +46,7 @@ unset($_SESSION['alert']);
 	</div>
 <!-- //banner -->
 <!-- banner-bottom -->
-	<div class="banner-bottom">
+	<div class="banner-bottom hidden">
 		<div class="container"> 
 			<div class="banner-bottom-grids">
 				<div class="banner-bottom-grid-left animated wow slideInLeft" data-wow-delay=".5s">
@@ -100,7 +100,7 @@ unset($_SESSION['alert']);
 	</div>
 <!-- //banner-bottom -->
 <!-- collections -->
-	<div class="new-collections">
+	<div class="new-collections hidden">
 		<div class="container">
 			<h3 class="animated wow zoomIn" data-wow-delay=".5s">New Collections</h3>
 			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
@@ -359,7 +359,7 @@ unset($_SESSION['alert']);
 	</div>
 <!-- //collections -->
 <!-- new-timer -->
-	<div class="timer">
+	<div class="timer hidden">
 		<div class="container">
 			<div class="timer-grids">
 				<div class="col-md-8 timer-grid-left animated wow slideInLeft" data-wow-delay=".5s">
@@ -408,7 +408,7 @@ unset($_SESSION['alert']);
 	</div>
 <!-- //new-timer -->
 <!-- collections-bottom -->
-	<div class="collections-bottom">
+	<div class="collections-bottom hidden">
 		<div class="container">
 			<div class="collections-bottom-grids">
 				<div class="collections-bottom-grid animated wow slideInLeft" data-wow-delay=".5s">

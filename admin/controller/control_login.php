@@ -40,4 +40,11 @@ if (isset($_POST['submit']) && $_POST['submit']=='login') {
 
 }
 
+if (isset($_GET['action']) && $_GET['action']=='logout_admin')  {
+	
+	unset($_SESSION['login']);
+	$page = '../login.php';
+	safe_redirect($page);
+}
+
 ?>

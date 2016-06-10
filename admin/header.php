@@ -47,7 +47,7 @@
     <div class="wrapper">
 
 <header class="main-header">
-  <a href="home" class="logo">
+  <a href="index.php" class="logo">
     <!-- <img src="<?php echo BASE_URL ?>asset/koperasi_template/logo.jpg" width="10%"> -->
     Dashboard Admin
   </a>
@@ -98,7 +98,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div> -->
               <div class="pull-right">
-                <a href="<?php echo BASE_URL ?>login/logoutUser" class="btn btn-default fa-sign-out">Sign out</a>
+                <a href="<?php echo BASE_URL ?>controller/control_login.php?action=logout_admin" class="btn btn-default fa-sign-out">Sign out</a>
               </div>
             </li>
           </ul>
@@ -265,6 +265,7 @@
             </li> -->
             <li class="<?php echo basename($_SERVER['PHP_SELF'])=='master_product_category.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>master_product_category.php"><i class="fa fa-edit"></i> <span>Master Category</span></a></li>
             <li class="<?php echo basename($_SERVER['PHP_SELF'])=='master_product.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>master_product.php"><i class="fa  fa-cubes"></i> <span>Master Product</span></a></li>
+            <li class="<?php echo basename($_SERVER['PHP_SELF'])=='master_biaya_pengiriman.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>master_biaya_pengiriman.php"><i class="fa fa-edit"></i> <span>Biaya Pengiriman</span></a></li>
             <li class="<?php echo basename($_SERVER['PHP_SELF'])=='report_customer.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>report_customer.php"><i class="fa  fa-user-plus"></i> <span>Customer</span></a></li>
             <li class="<?php echo basename($_SERVER['PHP_SELF'])=='report_orders.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>report_orders.php"><i class="fa fa-book"></i> <span>Report Orders</span></a></li>
             <li class="<?php echo basename($_SERVER['PHP_SELF'])=='stock_manager.php'?'active':'' ?>"><a href="<?php echo BASE_URL ?>stock_manager.php"><i class="fa  fa-recycle"></i> <span>Stock Manager</span></a>

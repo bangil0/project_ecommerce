@@ -1,5 +1,5 @@
 <?php 
-// echo basename($_SERVER['PHP_SELF'])=='home.php'?'active':'bukan';
+// echo basename($_SERVER['PHP_SELF'])=='home.php'?'active':$_SERVER['PHP_SELF'];
 
 // var_dump(basename($_SERVER['PHP_SELF']));
  ?>
@@ -46,11 +46,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="header-grid">
 				<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
 					<ul>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="<?php echo $baseurl ?>mailto:info@example.com">@example.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li>
+<!-- 						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="<?php echo $baseurl ?>mailto:info@example.com">@example.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li> -->
 
 						<?php if (isset($_SESSION['login'])): ?>
-								<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="#">Welcome, <?php echo $_SESSION['login']['first_name'] ?></a></li>
+								<li><i class="glyphicon glyphicon-user" aria-hidden="true"></i><a href="#">Welcome, <?php echo $_SESSION['login']['first_name'] ?></a></li>
+								<li><i class="glyphicon glyphicon-log-out" aria-hidden="true"><a href="<?php echo BASE_URL ?>controller/control_login.php?action=logout_user">Logout</a></i></li>
 							<?php else: ?>
 								<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="<?php echo $baseurl."pages/" ?>login.php">Login</a></li>
 								<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="<?php echo $baseurl."pages/" ?>register.php">Register</a></li>
@@ -86,6 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="nav navbar-nav">
 							<li class="<?php echo basename($_SERVER['PHP_SELF'])=='index.php'?'active':'' ?>"><a href="<?php echo $baseurl ?>index.php" class="act">Home</a></li>	
 							<!-- Mega Menu -->
+							<li><a href="<?php echo $baseurl ?>product.php">Product</a></li>
 							 <li class="dropdown active">
 								<a href="<?php echo $baseurl ?>#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column columns-3">
@@ -95,7 +97,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												<h6>List Of Product</h6>
 												<?php if (!empty($list_category_product)): ?>
 													<?php foreach ($list_category_product as $key => $value): ?>
-																<li><a href="<?php echo $baseurl ?>product.php?product_category=<?php echo $value->id  ?>"><?php echo $value->name_category ?></a></li>
+																<li class="active"><a href="<?php echo $baseurl ?>product.php?product_category=<?php echo $value->id  ?>"><?php echo $value->name_category ?></a></li>
 													<?php endforeach ?>
 												<?php endif ?>
 											</ul>
@@ -104,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</ul>
 							</li>
-							<li class="dropdown">
+							<li class="dropdown hidden">
 								<a href="<?php echo $baseurl ?>#" class="dropdown-toggle" data-toggle="dropdown">Furniture <b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column columns-3">
 									<div class="row">
@@ -142,8 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</ul>
 							</li>
-							<li class="active"><a href="<?php echo $baseurl ?>short-codes.html">Short Codes</a></li>
-							<li><a href="<?php echo $baseurl ?>mail.html">Mail Us</a></li>
+							<li><a href="<?php echo $baseurl ?>pages/konfirmasi_pembayaran.php">Konfirmasi Pembayaran</a></li>
 						</ul>
 					</div>
 					</nav>

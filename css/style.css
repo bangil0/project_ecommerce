@@ -1224,6 +1224,7 @@ select#country,select#country1 {
 }
 .products-right-grids-bottom-grid {
     padding-left: 0;
+    margin-bottom: 10px;
 }
 .products-right-grid1:nth-child(2) {
     margin: 1em 0 !important;

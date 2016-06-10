@@ -5,8 +5,6 @@ include "../header.php";
 <?php
 show_alert($_SESSION['alert']['type'], $_SESSION['alert']['msg']);
 unset($_SESSION['alert']);
-// var_dump($_SESSION);
-// var_dump(array_values($_SESSION['cart']));
 ?>
 
 <!-- cart -->

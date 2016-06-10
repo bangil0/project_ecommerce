@@ -301,21 +301,17 @@ function validateCheckout(){
    var lname    = $('#id-lname').val();
    var phone    = $('#id-phone').val();
    var address  = $('#id-address').val();
+   var city     = $('#id_checkout_user_city').val();
    var country  = $('#id-country option:selected').val();
    
-   if(country == 'Indonesia'){
-      var province = $('#id-province option:selected').val();
-      var city     = $('#id-city option:selected').val();
-   }else{
-      var province = $('#id-province').val();
-      var city     = $('#id-city').val();
-   }
    
    var postal   = $('#id-postal').val();
    var shipping = $('#id-opt-shipping-0').val();
    var payment  = $('#id-payment option:selected').val();
    var payment_method = $('#id-payment-method option:selected').val();
    
+
+   $('#id-row-address').removeClass('has-error');
    $('#id-row-fname').removeClass('has-error');
    $('#id-row-lname').removeClass('has-error');
    $('#id-row-phone').removeClass('has-error');
@@ -329,42 +325,49 @@ function validateCheckout(){
    
    if(fname == ''){
       $('#id-row-fname').addClass('has-error');
+      alert("Silahkan lengkapi DATA !");
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
 	  
    }else if(lname == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-lname').addClass('has-error');
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
    }else if(phone == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-phone').addClass('has-error');
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
    }else if(address == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-address').addClass('has-error');
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
    }else if(country == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-country').addClass('has-error');
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
    }else if(city == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-city').addClass('has-error');
-	  $root.animate({
+	   $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);
 	  return false;
    }else if(postal == ''){
+      alert("Silahkan lengkapi DATA !");
       $('#id-row-postal').addClass('has-error');
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top

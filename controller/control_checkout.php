@@ -45,7 +45,7 @@ if (!isset($_SESSION['order_id'])) {
 		$que_table_transaksi_detail = "INSERT INTO transaksi_detail(order_id,product_id,qty,buying_price) VALUES ('".$get_last_order_id."','".$value['product_id']."','".$value['qty']."','".$value['selling_price']."') ";
 		insert_data($que_table_transaksi_detail);
 	}
-	var_dump($grandTotal);
+	// var_dump($grandTotal);
 
 	$_SESSION['order_id'] = $get_last_order_id;
 

@@ -75,7 +75,7 @@ unset($_SESSION['alert']);
 		        </select>
 		      </div>
 		    </div><!--.form-group-->
-		    <div class="form-group row">
+		    <div class="form-group row" id="id-row-city">
 		      <label class="col-sm-3 control-label">Destination</label>
 				<div class="col-sm-9">
 					<select class="form-control option_value" name="checkout_user_city" id="id_checkout_user_city">

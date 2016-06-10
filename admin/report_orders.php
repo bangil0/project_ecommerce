@@ -1,7 +1,7 @@
 <?php include "header_admin.php"; ?>
 <?php 
 
-$list_orders = fetchData('multiple',"SELECT *
+$list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_timestamp
                                 FROM transaksi tr
                                 JOIN tbl_user u ON tr.`user_id`=u.`id`
                                 WHERE 1");
@@ -12,7 +12,7 @@ $list_orders = fetchData('multiple',"SELECT *
 <section class="content">
   <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">List Customer</h3>
+      <h3 class="box-title">List Report Order</h3>
     <div class="block-content collapse in">
   <div class="span12 hi">
      <div class="table-toolbar">
@@ -87,7 +87,7 @@ $list_orders = fetchData('multiple',"SELECT *
                       <?php foreach ($list_orders as $value) { ?>
                       <tr>                   
                         <td><?php echo $value->order_id ?></td>
-                        <td><?php echo date('d-m-Y ',strtotime($value->created_timestampt)) ?></td>
+                        <td><?php echo $value->created_timestamp ?></td>
                         <td><?php echo $value->first_name ?></td>
                         <td><?php echo $value->total_belanja ?></td>
                         <td><?php echo $value->total_shipping ?></td>
@@ -99,10 +99,15 @@ $list_orders = fetchData('multiple',"SELECT *
                               <a href="<?php echo BASE_URL."/goo" ?>">
                                 <button class="btn btn-warning btn-flat" ><?php echo strtoupper(str_replace('_', ' ', $value->status)) ?></button>
                               </a>
+                                <div class="payment-notes">
+                                  Bank Transfer via: BCA <br>
+                                  Account Name: Michelle Renata <br>
+                                  Rp35.500<br>
+                                </div>
                             </td>
                         <?php else: ?>
                             <td>
-                            <label class="label-info">
+                            <label>
                               <a href="#"><?php echo strtoupper(str_replace('_', ' ', $value->status)) ?></a>
                             </label>
                             </td>
@@ -217,7 +222,7 @@ $list_orders = fetchData('multiple',"SELECT *
                   $('#tanggal_transaksi').html(data[0].created_transaksi);
                   $('#pelanggan').html(data[0].first_name);
                 $('#total').html('Rp '+data[0].total_belanja);
-                $('#ppn').html(data[0].total_shipping);
+                $('#ppn').html('Rp '+data[0].total_shipping);
                 $('#grand_total').html('Rp '+data[0].grand_total);
 
                 

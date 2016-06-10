@@ -69,7 +69,7 @@ unset($_SESSION['order_number']);
               <h3 class="h6 m_b_10"><strong>Confirm</strong></h3>
               <div class="step-content">
                 Confirm your payment at<br/>
-                <a href="<?php echo BASE_URL."confirm";?>"><?php echo BASE_URL."confirm";?></a>
+                <a href="<?php echo BASE_URL."konfirmasi_pembayaran.php";?>">Konfirmasi Pembayaran</a>
               </div>
             </div>
             
