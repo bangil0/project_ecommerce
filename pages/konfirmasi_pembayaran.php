@@ -23,7 +23,7 @@ unset($_SESSION['alert']);
           <div class="form-group clearfix" id="id-row-number">
             <label class="control-label col-sm-3">Order #</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="id-number" name="number">
+              <input type="text" class="form-control" id="id-number" name="number" placeholder="Order ID">
             </div>
           </div>
 
@@ -39,7 +39,7 @@ unset($_SESSION['alert']);
             <div class="form-group clearfix" id="id-row-name">
               <label class="control-label col-sm-3">Nama Akun Bank</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="id-name" name="name" placeholder="">
+                <input type="text" class="form-control" id="id-name" name="name" placeholder="Nama Akun Bank">
               </div>
             </div>
 

@@ -44,7 +44,15 @@ unset($_SESSION['alert']);
 							<?php foreach (array_values($_SESSION['cart']) as $key => $value): ?>
 								<tr class="rem<?php echo $value['product_id'] ?>">
 									<td class="invert"><?php echo $key+1 ?></td>
-									<td class="invert-image"><a href="single.html"><img src="<?php echo $baseurl?>images/22.jpg" alt=" " class="img-responsive" /></a></td>
+									<?php 
+										if ($value['product_image']=="") {
+											$product_image = "product_picture_empty.png";
+										} 
+										else{
+											$product_image = $value['product_image'];
+										}
+									?>
+									<td class="invert-image"><a href="single.html"><img src="<?php echo $baseurl.'product_images/'.$product_image?>" alt=" " class="img-responsive" /></a></td>
 									<td class="invert">
 										 <div class="quantity"> 
 											<div class="quantity-select">                           

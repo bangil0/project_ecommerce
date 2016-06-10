@@ -8,10 +8,9 @@ if (isset($_POST['status']) && $_POST['status']=="add_product") {
 	$qty = $_POST['qty'];
 }
 else if($_POST['status']=="remove_product"){
-	$qty = -1;
+	$qty = "";
 }
 else{
-	var_dump("sam");
 	$qty = '-'.$_POST['qty'];
 }
 
@@ -20,17 +19,16 @@ if ($product_id!="" && $qty!="") {
 	$sql_get_product = "SELECT * FROM product p WHERE 1
 						AND p.`id`='".$product_id."'";
 	$data_product = fetchData('single',$sql_get_product);
-	// var_dump($data_product);
-	// die;
+
 	$key_session_cart = search_array_cart($_SESSION['cart'],$product_id);
-	// var_dump($key_session_cart);
-	// die;
+
 	if (!empty($data_product)) {
 		// Jika Product Sebelumnya tidak ada di Session Maka di Add ke Session
 		if (!is_int($key_session_cart)) {
 			$_SESSION['cart'][] = array(
 										"product_id"=>$product_id,
 										"nama_product"=>$data_product->nama_product,
+										"product_image"=>$data_product->image,
 										"selling_price"=>$data_product->selling_price,
 										"qty"=>$qty,
 										"subtotal"=>$qty*$data_product->selling_price
@@ -42,6 +40,7 @@ if ($product_id!="" && $qty!="") {
 			$_SESSION['cart'][$key_session_cart] = array(
 															"product_id"=>$product_id,
 															"nama_product"=>$data_product->nama_product,
+															"product_image"=>$data_product->image,
 															"selling_price"=>$data_product->selling_price,
 															"qty"=>$_SESSION['cart'][$key_session_cart]['qty']+$qty,
 															"subtotal"=>($_SESSION['cart'][$key_session_cart]['qty']+$qty)*$data_product->selling_price
@@ -49,9 +48,16 @@ if ($product_id!="" && $qty!="") {
 		}
 	}
 	validate_empty_cart();
-	// var_dump($_SESSION);
 
 }
+
+// Jika Product Di Remove dari ShoppingCart
+// 
+else{
+	$key_session_cart = search_array_cart($_SESSION['cart'],$product_id);
+	unset($_SESSION['cart'][$key_session_cart]);
+} 
+
 
 
 function validate_empty_cart()
@@ -63,7 +69,6 @@ function validate_empty_cart()
 			}
 		}
 	}
-	// die;
 }
 
 

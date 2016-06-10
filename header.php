@@ -51,7 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<?php if (isset($_SESSION['login'])): ?>
 								<li><i class="glyphicon glyphicon-user" aria-hidden="true"></i><a href="#">Welcome, <?php echo $_SESSION['login']['first_name'] ?></a></li>
-								<li><i class="glyphicon glyphicon-log-out" aria-hidden="true"><a href="<?php echo BASE_URL ?>controller/control_login.php?action=logout_user">Logout</a></i></li>
+								<li><i class="glyphicon glyphicon-log-out" aria-hidden="true"><a href="<?php echo $baseurl ?>controller/control_login.php?action=logout_user">Logout</a></i></li>
 							<?php else: ?>
 								<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="<?php echo $baseurl."pages/" ?>login.php">Login</a></li>
 								<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="<?php echo $baseurl."pages/" ?>register.php">Register</a></li>

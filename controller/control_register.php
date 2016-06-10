@@ -1,8 +1,7 @@
 <?php 
-error_reporting(E_ALL);
 include "../config.php";
 // var_dump($baseurl);
-print_post();
+// print_post();
 if (isset($_POST['submit']) && $_POST['submit']=='register') {
 	// echo "string";
 	$first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);

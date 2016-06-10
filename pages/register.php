@@ -46,7 +46,7 @@ unset($_SESSION['alert']);
 				</form>
 			</div>
 			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-				<a href="index.html">Home</a>
+				<a href="<?php echo $baseurl ?>">Home</a>
 			</div>
 		</div>
 	</div>
