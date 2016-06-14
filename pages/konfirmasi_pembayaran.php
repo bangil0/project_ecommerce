@@ -7,13 +7,21 @@ show_alert($_SESSION['alert']['type'], $_SESSION['alert']['msg']);
 unset($_SESSION['alert']);
 ?>
 
+<div class="breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+      <li><a href="<?php echo $baseurl."index.php" ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+      <li class="active">Konfirmasi Pembayaran</li>
+    </ol>
+  </div>
+</div>
 
 <div class="container main">
   <div class="line"></div>
   <div class="content">
     <div class="row">
       <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-        <div class="box clearfix">
+        <div class="box clearfix" style="margin:20px">
         <form role="form" method="post" class="form-horizontal" action="<?php echo $baseurl."controller/control_konfirmasi_pembayaran.php" ?>">
           <h1 class="h4 heading">KONFIRMASI PEMBAYARAN</h1>
           <p class="subheading">Hanya Untuk Bank Transfer</p>
