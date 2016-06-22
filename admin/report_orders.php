@@ -46,14 +46,14 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
             <input type="text" name="to" class="form-control datepicker" value="<?php echo isset($_GET['to'])?$_GET['to']:"" ?>">
           </div>
         </div>
-        <div class="form-group">
+<!--         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label" id="name">Group By</label>
           <div class="col-sm-3">
             <select name="group_by" class="form-control select2" style="width: 100%;" id="nik">
               <option value="">- Pilih -</option>
             </select>
           </div>
-        </div>
+        </div> -->
 
 
 
@@ -99,13 +99,31 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
                               <a href="<?php echo BASE_URL."/goo" ?>">
                                 <button class="btn btn-warning btn-flat" ><?php echo strtoupper(str_replace('_', ' ', $value->status)) ?></button>
                               </a>
-                                <div class="payment-notes">
-                                  Bank Transfer via: BCA <br>
-                                  Account Name: Michelle Renata <br>
-                                  Rp35.500<br>
-                                </div>
+                                  <?php if (!empty($value->akun_bank_customer)): ?>
+                                        <div class="payment-notes">
+                                          Account Name: <?php echo $value->akun_bank_customer ?> <br>
+                                          Rp<?php echo $value->grand_total ?><br>
+                                        </div>  
+                                  <?php endif ?>
                             </td>
-                        <?php else: ?>
+                            <?php elseif ($value->status=='paid'): ?>                     
+                                <td>
+                                  <span class="bg-green" style="
+                                            font-weight: 600;
+                                            padding: 5px;
+                                            display: inline-block;
+                                            background-color: #fff;
+                                            text-align: center;
+                                            width:91.56px">
+                                            <?php echo strtoupper(str_replace('_', ' ', $value->status)) ?>
+                                  </span>
+                                     <div class="payment-notes">
+                                       Bank Transfer via: BCA <br>
+                                       Account Name: Michelle Renata <br>
+                                       Rp35.500<br>
+                                     </div>
+                                 </td>
+                            <?php else: ?>
                             <td>
                             <label>
                               <a href="#"><?php echo strtoupper(str_replace('_', ' ', $value->status)) ?></a>
@@ -132,21 +150,28 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
           <h3 class="modal-title"><span value="samuel erwardi" id="title_shu"></span></h3>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-3">Order ID</div>
-            <div class="col-sm-1">:</div>
-            <div class="col-sm-8" id="order_id"></div>
+
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-sm-3">Order ID</div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-8" id="order_id"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">Tanggal</div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-8" id="tanggal_transaksi">Testes</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-3">Customer</div>
+              <div class="col-sm-1">:</div>
+              <div class="col-sm-8" id="pelanggan">Testes</div>
+            </div>
           </div>
-          <div class="row">
-            <div class="col-sm-3">Tanggal</div>
-            <div class="col-sm-1">:</div>
-            <div class="col-sm-8" id="tanggal_transaksi">Testes</div>
+          <div class="col-md-4">
+            <textarea class="form-control" rows="3" disabled style="resize: none;" id="alamat"></textarea>
           </div>
-          <div class="row">
-            <div class="col-sm-3">Customer</div>
-            <div class="col-sm-1">:</div>
-            <div class="col-sm-8" id="pelanggan">Testes</div>
-          </div>
+
           <table class="table table-striped" id="tblGrid">
             <thead id="tblHead">
               <tr>
@@ -218,6 +243,7 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
                     '</tr>';
               $("#mutasi_anggota").append(row);     
                   };
+                  $('#alamat').html(data[0].address);
                   $('#order_id').html(data[0].order_id);
                   $('#tanggal_transaksi').html(data[0].created_transaksi);
                   $('#pelanggan').html(data[0].first_name);

@@ -5,7 +5,22 @@ include "header.php";
 <?php
 show_alert($_SESSION['alert']['type'], $_SESSION['alert']['msg']);
 unset($_SESSION['alert']);
-// var_dump($_SESSION);
+
+$id_product = filter_var($_GET['id_product'], FILTER_SANITIZE_STRING);
+
+$get_product = fetchData('single',"SELECT * FROM product WHERE 1
+										AND product_visibility=1 AND id='".$id_product."' ");
+if ($get_product) 
+{
+	$product_review = fetchData('multiple',"SELECT * FROM product_review pr 
+												JOIN tbl_user tu ON tu.`id`=pr.`id_user`
+												WHERE 1
+												AND id_product='".$id_product."'");	
+}
+else
+{
+	safe_redirect('product.php');
+}
 ?>
 <!-- //header -->
 <!-- breadcrumbs -->
@@ -13,7 +28,7 @@ unset($_SESSION['alert']);
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="<?php echo BASE_URL."index.php" ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="active">Single Page</li>
+				<li class="active">Product Review</li>
 			</ol>
 		</div>
 	</div>
@@ -22,20 +37,14 @@ unset($_SESSION['alert']);
 	<div class="single">
 		<div class="container">
 
-
+								<!-- <div class="thumb-image"> <img src="<?php echo BASE_URL."product_images/".$get_product->image ?>" data-imagezoom="true" class="img-responsive"> </div> -->
 
 			<div class="col-md-12 single-right">
 				<div class="col-md-5 single-right-left animated wow slideInUp" data-wow-delay=".5s">
 					<div class="flexslider">
 						<ul class="slides">
-							<li data-thumb="images/si.jpg">
-								<div class="thumb-image"> <img src="images/si.jpg" data-imagezoom="true" class="img-responsive"> </div>
-							</li>
-							<li data-thumb="images/si1.jpg">
-								 <div class="thumb-image"> <img src="images/si1.jpg" data-imagezoom="true" class="img-responsive"> </div>
-							</li>
 							<li data-thumb="images/si2.jpg">
-							   <div class="thumb-image"> <img src="images/si2.jpg" data-imagezoom="true" class="img-responsive"> </div>
+								<div class="thumb-image"> <img src="<?php echo BASE_URL."product_images/".$get_product->image ?>" data-imagezoom="true" class="img-responsive"> </div> 
 							</li> 
 						</ul>
 					</div>
@@ -54,44 +63,9 @@ unset($_SESSION['alert']);
 					<!-- flixslider -->
 				</div>
 				<div class="col-md-7 single-right-left simpleCart_shelfItem animated wow slideInRight" data-wow-delay=".5s">
-					<h3>Men's Solid Casual Shirt</h3>
-					<h4><span class="item_price">$550</span> - $900</h4>
-					<div class="rating1">
-						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5">
-							<label for="rating5">5</label>
-							<input id="rating4" type="radio" name="rating" value="4">
-							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3" checked>
-							<label for="rating3">3</label>
-							<input id="rating2" type="radio" name="rating" value="2">
-							<label for="rating2">2</label>
-							<input id="rating1" type="radio" name="rating" value="1">
-							<label for="rating1">1</label>
-						</span>
-					</div>
-					<div class="description">
-						<h5><i>Description</i></h5>
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-							eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-					</div>
-					<div class="social">
-						<div class="social-left">
-							<p>Share On :</p>
-						</div>
-						<div class="social-right">
-							<ul class="social-icons">
-								<li><a href="#" class="facebook"></a></li>
-								<li><a href="#" class="twitter"></a></li>
-								<li><a href="#" class="g"></a></li>
-								<li><a href="#" class="instagram"></a></li>
-							</ul>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-				<div class="bootstrap-tab animated wow slideInUp" data-wow-delay=".5s">
+					<h3><?php echo $get_product->nama_product." - ".$get_product->merk ?></h3>
+					<h4><span class="item_price"><b>IDR</b> <?php echo $get_product->selling_price ?></span></h4>
+
 					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 						<ul id="myTab" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Description</a></li>
@@ -112,44 +86,33 @@ unset($_SESSION['alert']);
 							</div>
 							<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
 								<div class="bootstrap-tab-text-grids">
+
+							<?php if (!empty($product_review)): ?>
+								<?php foreach ($product_review as $key => $value): ?>
 									<div class="bootstrap-tab-text-grid">
 										<div class="bootstrap-tab-text-grid-left">
 											<img src="images/4.png" alt=" " class="img-responsive" />
 										</div>
-										<div class="bootstrap-tab-text-grid-right">
-											<ul>
-												<li><a href="#">Admin</a></li>
-												<li><a href="#"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>Reply</a></li>
-											</ul>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
-												suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem 
-												vel eum iure reprehenderit.</p>
-										</div>
-										<div class="clearfix"> </div>
-									</div>
-									<div class="bootstrap-tab-text-grid">
-										<div class="bootstrap-tab-text-grid-left">
-											<img src="images/5.png" alt=" " class="img-responsive" />
-										</div>
-										<div class="bootstrap-tab-text-grid-right">
-											<ul>
-												<li><a href="#">Admin</a></li>
-												<li><a href="#"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>Reply</a></li>
-											</ul>
-											<p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis 
-												suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem 
-												vel eum iure reprehenderit.</p>
-										</div>
+												<div class="bootstrap-tab-text-grid-right">
+													<ul>
+														<li><a href="#"><?php echo $value->first_name ?></a></li>
+														<li><a href="#"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><?php echo $value->created_timestamp ?></a></li>
+													</ul>
+													<?php echo $value->review_detail ?>
+												</div>
+								<?php endforeach ?>
+							<?php else: ?>
+								Empty Review
+							<?php endif ?>
 										<div class="clearfix"> </div>
 									</div>
 									<div class="add-review">
 										<h4>add a review</h4>
-										<form>
-											<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-											<input type="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-											<input type="text" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}" required="">
-											<textarea type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
-											<input type="submit" value="Send" >
+										<form class="form-horizontal" method="post" action="<?php echo $baseurl ?>controller/control_product_review.php">
+											<input type="hidden" name="id_product" value="<?php echo $id_product ?>">
+											<input type="hidden" name="id_user" value="<?php echo $_SESSION['login']['user_id'] ?>">
+											<textarea type="text"  name="review_detail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+											<input type="submit" name="submit" value="<?php echo empty($_SESSION['login']['user_id'])?'Login Dahulu':'submit' ?>" <?php echo empty($_SESSION['login']['user_id'])?'disabled':'' ?> >
 										</form>
 									</div>
 								</div>
@@ -162,6 +125,15 @@ unset($_SESSION['alert']);
 							</div>
 						</div>
 					</div>
+
+
+
+				</div>
+				<div class="clearfix"> </div>
+				<div class="bootstrap-tab animated wow slideInUp" data-wow-delay=".5s">
+					
+
+
 				</div>
 			</div>
 			<div class="clearfix"> </div>

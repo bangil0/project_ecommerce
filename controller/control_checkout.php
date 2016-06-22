@@ -19,6 +19,13 @@ if (empty($_SESSION['login'])) {
 // 
 // Jika Baru pertama kali akses ke halaman Checkout Maka data di Session di insert ke Session 
 if (!isset($_SESSION['order_id'])) {
+	$check_booking = 'SELECT tr.order_id,td.`product_id`,SUM(td.`qty`)
+						FROM transaksi_detail td
+						JOIN transaksi tr ON tr.`order_id`=td.`order_id`
+						WHERE 1
+						AND tr.`status`='shopping_cart'
+						GROUP BY td.`product_id`';
+						
 	$grand_total_transaksi = 0 ;
 	// var_dump(count($_SESSION['cart']));
 	// die;

@@ -170,7 +170,7 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                           >
                             <i class="icon-pencil icon-white"></i> Edit
                           </a>
-                          <a href="<?php echo BASE_URL."controller/control_product.php?delete_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default btn-delete" >
+                          <a href="<?php echo BASE_URL."controller/control_product.php?delete_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default btn-delete confirm" >
                             <i class="icon-pencil icon-white"></i> Delete
                           </a>
                         </td>
@@ -218,7 +218,12 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
   <?php include "footer.php"; ?>
   <script type="text/javascript" src="<?php echo BASE_URL ?>asset/my_js/scripts_master_user.js"></script>
   <script type="text/javascript">
-    // $(document).ready(function() {
+    $(document).ready(function(){
+        $(".confirm").confirm({
+          text: "Are you sure you want to delete that comment?"
+        });
+
+    });
     //   $(".btn_edit").click(function(event) {
     //        CKEDITOR.remove(CKEDITOR.instances.iddescription);
     //       // CKEDITOR.instances.iddescription.destroy();
