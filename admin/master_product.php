@@ -137,7 +137,8 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                         <th>Category Product</th>
                         <th>Foto Product</th>
                         <th>Selling Price</th>
-                        <th>CREATED TIME</th>
+                        <th>Creted Time</th>
+                        <th>List Testimoni</th>
                         <th>ACTION</th>
                       </tr>
                     </thead>
@@ -158,6 +159,9 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                         <?php endif ?>
                         <td><?php echo $value->selling_price ?></td>
                         <td><?php echo $value->created_timestamp ?></td>
+                        <td>
+                          <button class="btn btn-default fa fa-gg-circle view-detail" value="<?php echo $value->id ?>"> Detail</button>
+                        </td>
                         <td width="16%">
                           <a href="#" class="btn btn-default fa fa-edit btn-default btn_edit"
                               data-kodeproduct="<?php echo $value->id ?>"
@@ -185,6 +189,45 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
       </div><!-- /.box -->
   </div>
 </section>
+<div class="modal fade" id="myModal">
+<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title"><span value="samuel erwardi" id="title_shu"></span></h3>
+        </div>
+        <div class="modal-body">
+
+
+          <table class="table table-striped" id="tblGrid">
+            <thead id="tblHead">
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th class="text-right">Harga</th>
+                <th class="text-right">Qty</th>
+                <th class="text-right">Sub Total</th>
+              </tr>
+            </thead>
+            <tbody id="mutasi_anggota">
+              
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+          </table>
+          <div class="form-group">
+            <div class="clearfix"></div>
+          </div>
+    </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 <style>
   .image-modal {
     position: fixed;
@@ -221,6 +264,47 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
     $(document).ready(function(){
         $(".confirm").confirm({
           text: "Are you sure you want to delete that comment?"
+        });
+        $(function(){
+
+          $("#example1").on('click','.view-detail',function(){
+            var id_product = $(this).val();
+            // $("#mutasi_anggota").html("");
+            $("#myModal").modal('show');
+                $.ajax({
+                    url:"controller/control_json.php?master_product",
+                    type:"get",
+                    data:{id_product:id_product},
+                    success:function(data){
+                      console.log(data);
+                      console.log(data.length);
+                    // $("#title_shu").html(data['result'][0]['nama']);
+                    if (data.length>0){
+                        for (var i =0 ; i < data.length; i++) {
+                          var row='<tr>'+
+                              '<td>'+data[i].product_id+'</td>'+
+                              '<td>'+data[i].nama_product+'</td>'+
+                              '<td class="text-right">'+data[i].qty+'</td>'+
+                              '<td class="text-right">'+data[i].selling_price+'</td>'+
+                              '<td class="text-right">'+data[i].subtotal+'</td>'+                        
+                          '</tr>';
+                    $("#mutasi_anggota").append(row);     
+                        };
+                        $('#alamat').html(data[0].address);
+                        $('#order_id').html(data[0].order_id);
+                        $('#tanggal_transaksi').html(data[0].created_transaksi);
+                        $('#pelanggan').html(data[0].first_name);
+                      $('#total').html('Rp '+data[0].total_belanja);
+                      $('#ppn').html('Rp '+data[0].total_shipping);
+                      $('#grand_total').html('Rp '+data[0].grand_total);
+
+                      
+                      $("#myModal").modal('show');
+                    // showModalDialog($("#myModal"));
+                    };
+                  }
+              });
+          });
         });
 
     });

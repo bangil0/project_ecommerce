@@ -4,6 +4,24 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+.thumb-label.sold-out {
+    background: rgba(153,153,153,0.8);
+    color: #fff;
+}
+
+.thumb-label.sold-out {
+    bottom: 0;
+    background: rgba(0,0,0,0.05);
+    width: 100%;
+    color: #999;
+    padding: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
 html, body{
     font-size: 100%;
 	background:	#fff;

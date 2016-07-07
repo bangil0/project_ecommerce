@@ -1,7 +1,6 @@
 <?php 
 include "../config.php";
 // var_dump($_SESSION);
-
 // var_dump($_SESSION['cart']);
 // var_dump($_SESSION['login']);
 // print_post();
@@ -23,7 +22,7 @@ if (!isset($_SESSION['order_id'])) {
 						FROM transaksi_detail td
 						JOIN transaksi tr ON tr.`order_id`=td.`order_id`
 						WHERE 1
-						AND tr.`status`='shopping_cart'
+						AND tr.`status`="shopping_cart"
 						GROUP BY td.`product_id`';
 						
 	$grand_total_transaksi = 0 ;
@@ -41,21 +40,43 @@ if (!isset($_SESSION['order_id'])) {
 	// var_dump($get_last_order_id);
 	// Hitung Grand Total Dari Session
 	foreach ($_SESSION['cart'] as $key => $value) {	
+		$status_product = array();
 		$grandTotal += $value['subtotal'];
+		$sql_get_qty = "SELECT qty FROM stock_product 
+						WHERE 1
+						AND id_product='".$value['product_id']."'"; 
+		$get_qty = fetchData('single', $sql_get_qty);
+		if ($value['qty'] > $get_qty->qty) {
+			$status_product[] = "false";
+		}
+		// var_dump($status_product);
+		// var_dump($value['qty']);
+		// var_dump($get_qty->qty);
 	}
-	$que_table_transaksi = "INSERT INTO transaksi(order_id,user_id,total_belanja,grand_total) VALUES ('".$get_last_order_id."','".$_SESSION['login']['user_id']."','".$grandTotal."','".$grandTotal."')";
-	insert_data($que_table_transaksi);
-
-	// Insert Table Transaksi Detail
-	foreach ($_SESSION['cart'] as $key => $value) {	
-
-		$que_table_transaksi_detail = "INSERT INTO transaksi_detail(order_id,product_id,qty,buying_price) VALUES ('".$get_last_order_id."','".$value['product_id']."','".$value['qty']."','".$value['selling_price']."') ";
-		insert_data($que_table_transaksi_detail);
+	if (in_array("false", $status_product)){
+		set_alert('danger', 'Product Out OF Stock ');
+		safe_redirect('../pages/shopping-cart.php');
+		break;	
 	}
-	// var_dump($grandTotal);
+	else
+	{
+		$que_table_transaksi = "INSERT INTO transaksi(order_id,user_id,total_belanja,grand_total) VALUES ('".$get_last_order_id."','".$_SESSION['login']['user_id']."','".$grandTotal."','".$grandTotal."')";
+		insert_data($que_table_transaksi);
 
-	$_SESSION['order_id'] = $get_last_order_id;
+		// Insert Table Transaksi Detail
+		foreach ($_SESSION['cart'] as $key => $value) {	
 
+			$que_table_transaksi_detail = "INSERT INTO transaksi_detail(order_id,product_id,qty,buying_price) VALUES ('".$get_last_order_id."','".$value['product_id']."','".$value['qty']."','".$value['selling_price']."') ";
+			insert_data($que_table_transaksi_detail);
+
+			$sql_update_stock = "UPDATE stock_product SET qty=qty-'".$value['qty']."' WHERE 1 AND id_product='".$value['product_id']."'";
+			mysql_query($sql_update_stock);
+		}
+		// var_dump($grandTotal);
+
+		$_SESSION['order_id'] = $get_last_order_id;
+
+	}
 }
 
 if (isset($_POST['btn_submit_checkout']) && $_POST['btn_submit_checkout']=='Next') {
@@ -90,7 +111,7 @@ if (isset($_POST['btn_submit_checkout']) && $_POST['btn_submit_checkout']=='Next
 	// var_dump($que_get_transaksi);
 	var_dump($get_cost_shipping->cost+$que_get_transaksi->total_belanja);
 	$sum_shipping_belanja = $get_cost_shipping->cost+$que_get_transaksi->total_belanja;
-	$que_update_transaksi = "UPDATE transaksi SET total_shipping='".$get_cost_shipping->cost."',
+	$que_update_transaksi = "UPDATE transaksi SET total_shipping='".$get_cost_shipping->cost."',checkout_timestamp=NOW(),
 								grand_total='".$sum_shipping_belanja."',shipping_id='".$que_get_last_shipping_id->last_shipping."',status='checkout' 
 							 WHERE 1
 							 AND order_id='".$_SESSION['order_id']."'";

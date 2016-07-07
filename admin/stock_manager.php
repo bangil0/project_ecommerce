@@ -39,9 +39,20 @@ $list_products = fetchData('multiple',"SELECT *,pr.`id` AS id_product
                       <th>Merk</th>
                       <th>Price</th>
                       <th>Stock</th>
+                      <th>Qty Booked</th>
                     </tr>
                       <?php if (!empty($list_products)): ?>
-                        <?php foreach ($list_products as $key => $value): ?>
+                        <?php foreach ($list_products as $key => $value): 
+                          $sql_booked = "SELECT SUM(qty) AS qty_booked
+                                          FROM transaksi tr
+                                          JOIN transaksi_detail trd ON tr.`order_id`=trd.`order_id`
+                                          WHERE 1
+                                          AND tr.`status`='checkout'
+                                          AND trd.`product_id`='".$value->id_product."'
+                                          GROUP BY trd.`product_id`";
+                          $get_booked = fetchData('single',$sql_booked);
+                        ?>
+
                           <tr>
                             <td><?php echo $value->kode_product ?></td>
                             <td><?php echo $value->nama_product ?></td>
@@ -50,8 +61,9 @@ $list_products = fetchData('multiple',"SELECT *,pr.`id` AS id_product
                             <td><?php echo $value->selling_price ?></td>
                             <td>
                                 <input type="hidden" name="id_product[]" value="<?php echo $value->id_product ?>">
-                                <input type="text" name="qty_product[]" style="width:50px" value="<?php echo $value->qty==null?'0':$value->qty ?>" class="form-control">
+                                <input type="text" name="qty_product[]" style="width:70px" value="<?php echo $value->qty==null?'0':$value->qty ?>" class="form-control">
                             </td>
+                            <td><span class="label label-danger"><?php echo $get_booked->qty_booked?$get_booked->qty_booked:'0' ?></span></td>
                           </tr>
                         <?php endforeach ?>
                       <?php endif ?>

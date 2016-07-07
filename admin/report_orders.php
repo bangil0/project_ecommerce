@@ -1,11 +1,20 @@
 <?php include "header_admin.php"; ?>
 <?php 
 
+$where ='';
+if (isset($_GET['from']) && isset($_GET['to']))  {
+  $where = isset($_GET['from'])?' AND tr.created_timestamp >=  "'.$_GET['from'].'" ':'';
+  $where .= !empty($_GET['to'])?' AND tr.created_timestamp <=  "'.$_GET['to'].' 23:59:59" ':'';
+}
 $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_timestamp
                                 FROM transaksi tr
                                 JOIN tbl_user u ON tr.`user_id`=u.`id`
-                                WHERE 1");
+                                WHERE 1".$where);
 
+// var_dump("SELECT *,tr.`created_timestamp` AS created_timestamp
+//                                 FROM transaksi tr
+//                                 JOIN tbl_user u ON tr.`user_id`=u.`id`
+//                                 WHERE 1".$where);
 ?>
 
 
@@ -20,19 +29,14 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
            <a href="#" class="btn btn-success" id="btn_addnew">Add New <i class="icon-plus icon-white"></i></a>
         </div>
         <div class="btn-group pull-right">
-           <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
-           <ul class="dropdown-menu">
-              <li><a href="#">Print</a></li>
-              <li><a href="#">Save as PDF</a></li>
-              <li><a href="<?php echo BASE_URL ?>master_barang/TRUE">Export to Excel</a></li>
-           </ul>
+           <button class="btn btn-default"><a href="<?php echo BASE_URL ?>export_report_orders.php">Download Report</a></button>
         </div>
      </div>   
     </div> 
     </div>
     </div><!-- /.box-header -->
     <!-- form start -->
-    <form class="form-horizontal" id="form3" action="<?php echo BASE_URL ?>report_transaksi_pinjaman" method="get">
+    <form class="form-horizontal" id="form3" action="<?php echo BASE_URL ?>report_orders.php" method="get">
       <div class="box-body">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">From</label>

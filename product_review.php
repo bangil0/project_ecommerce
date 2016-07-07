@@ -100,12 +100,12 @@ else
 													</ul>
 													<?php echo $value->review_detail ?>
 												</div>
+										<div class="clearfix"> </div>
+									</div>
 								<?php endforeach ?>
 							<?php else: ?>
 								Empty Review
 							<?php endif ?>
-										<div class="clearfix"> </div>
-									</div>
 									<div class="add-review">
 										<h4>add a review</h4>
 										<form class="form-horizontal" method="post" action="<?php echo $baseurl ?>controller/control_product_review.php">

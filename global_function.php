@@ -114,7 +114,8 @@
    // die;
    $list_category_product = fetchData('multiple',$sql_category);
 
-   $sql_product = "SELECT * FROM product WHERE 1 AND product_visibility='1' ";
+   $sql_product = "SELECT *,p.`id` AS id FROM product p
+                     JOIN stock_product sp ON sp.`id_product`=p.`id` WHERE 1 AND product_visibility='1' ";
    
    if (isset($_GET['product_category'])) {
 
@@ -123,7 +124,7 @@
 
    $sql_city = "SELECT * FROM tbl_City";
    $list_city = fetchData('multiple',$sql_city);
-   
+   // var_dump($sql_product);
    $list_product = fetchData('multiple',$sql_product);   
    // var_dump($list_product);
    // die;

@@ -105,7 +105,12 @@ unset($_SESSION['alert']);
 									<h4><a href="<?php echo BASE_URL ?>product_review.php?id_product=<?php echo $value->id ?>?id_product=<?php echo $value->id ?>"><?php echo $value->nama_product; ?></a></h4>
 									<p>Vel illum qui dolorem.</p>
 									<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-										<p><span class="item_price">IDR <?php echo $value->selling_price ?></span><a class="item_add add_cart" href="#">add to cart<button style="display:none" value="<?php echo $value->id ?>" class="add_cart_id"></button></a></p>
+									<span class="item_price">IDR <?php echo $value->selling_price ?></span>
+										<?php if ($value->qty>0): ?>										
+											<p><a class="item_add add_cart" href="#">add to cart<button style="display:none" value="<?php echo $value->id ?>" class="add_cart_id"></button></a></p>
+										<?php else: ?>										
+											<div class="thumb-label sold-out" style="margin:1.3em 0 0">Sold Out</div>
+										<?php endif ?>
 									</div>
 								</div>
 							</div>

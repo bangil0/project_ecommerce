@@ -16,6 +16,15 @@ if (isset($_GET['order_id']) && isset($_GET['report'])) {
 		echo json_encode($data);
 }
 
+if (isset($_GET['id_product']) && isset($_GET['master_product'])) {
+		echo $_GET['id_product'];
+		header("content-type:application/json");
+		$data = fetchData('multiple',"SELECT * 
+							FROM product_review pr 
+							WHERE 1
+							AND pr.`id_product`='".$_GET['id_product']."'");
+		echo json_encode($data);
+}
 
 
 ?>

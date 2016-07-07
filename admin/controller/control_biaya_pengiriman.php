@@ -1,12 +1,8 @@
 <?php 
 include '../../config.php';
-// print_post();
-// die;
+print_post();
 
-var_dump($_POST['button']);
-
-if (isset($_POST['submit']) && $_POST['submit']=='add_pengiriman') {
-	echo "string";
+if (!empty($_POST)) {
 	$id_destination 	= $_POST['id_destination'];
 	$biaya_pengiriman	= $_POST['biaya_pengiriman']; 
 	$count_data 		= count($_POST['id_destination']);
