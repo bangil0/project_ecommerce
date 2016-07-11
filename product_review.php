@@ -69,7 +69,7 @@ else
 					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 						<ul id="myTab" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Description</a></li>
-							<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Reviews(2)</a></li>
+							<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Review</a></li>
 							<li role="presentation" class="dropdown">
 								<a href="#" id="myTabDrop1" class="dropdown-toggle hidden" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Information <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
@@ -80,9 +80,7 @@ else
 						</ul>
 						<div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
-								<h5>Product Brief Description</h5>
-								<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-									<span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>
+								<?php echo $get_product->description_product ?>								
 							</div>
 							<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
 								<div class="bootstrap-tab-text-grids">
@@ -96,7 +94,7 @@ else
 												<div class="bootstrap-tab-text-grid-right">
 													<ul>
 														<li><a href="#"><?php echo $value->first_name ?></a></li>
-														<li><a href="#"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><?php echo $value->created_timestamp ?></a></li>
+														<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <?php echo $value->created_timestamp ?></li>
 													</ul>
 													<?php echo $value->review_detail ?>
 												</div>

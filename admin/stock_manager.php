@@ -13,7 +13,7 @@ $list_products = fetchData('multiple',"SELECT *,pr.`id` AS id_product
   <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Stok Manager</h3>
-      <button class="pull-right btn btn-default">Download</button>
+      <button class="pull-right btn btn-default"><a href="<?php echo BASE_URL ?>export_stock_manager.php">Download Report</a></button>
     </div><!-- /.box-header -->
     <!-- form start -->
   <form action="<?php echo BASE_URL ?>controller/control_stock.php" method="POST">

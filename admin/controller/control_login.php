@@ -32,7 +32,7 @@ if (isset($_POST['submit']) && $_POST['submit']=='login') {
 		$_SESSION['login']['last_name'] = $result_check->last_name;
 		$type = 'success';			
 		$msg  = 'Welcome';
-		$page = '../index.php';
+		$page = '../master_product_category.php';
 	}
 
 	set_alert($type, $msg);

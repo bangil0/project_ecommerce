@@ -12,7 +12,6 @@ $list_biaya_pengiriman = fetchData('multiple',"SELECT *
   <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Master Biaya Pengiriman</h3>
-      <button class="pull-right btn btn-default">Download</button>
     </div><!-- /.box-header -->
     <!-- form start -->
         <div class="row">

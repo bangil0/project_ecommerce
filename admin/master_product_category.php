@@ -22,14 +22,6 @@ $data_product_category = fetchData("multiple","SELECT * FROM product_category WH
         <div class="btn-group">
            <a href="#" class="btn btn-success" id="btn_addnew">Add New <i class="icon-plus icon-white"></i></a>
         </div>
-        <div class="btn-group pull-right">
-           <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
-           <ul class="dropdown-menu">
-              <li><a href="#">Print</a></li>
-              <li><a href="#">Save as PDF</a></li>
-              <li><a href="<?php echo BASE_URL ?>master_product_category/TRUE">Export to Excel</a></li>
-           </ul>
-        </div>
      </div>   
     </div> 
     </div>
@@ -96,7 +88,7 @@ $data_product_category = fetchData("multiple","SELECT * FROM product_category WH
                             <a href="#" class="btn btn-default fa fa-edit btn-default btn_edit" data-idcategory="<?php echo $value->id ?>" data-selecttype=<?php echo $value->category_visibility ?> data-nama="<?php echo $value->name_category ?>">
                             <i class="icon-pencil icon-white"></i> Edit
                             </a>
-                          <a href="<?php echo BASE_URL."controller/control_category.php?delete_category_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default" >
+                          <a href="<?php echo BASE_URL."controller/control_category.php?delete_category_product=".$value->id ?>" class="btn btn-default fa fa-trash btn-default confirm" >
                             <i class="icon-pencil icon-white"></i> Delete
                           </a>
                         </td>
@@ -112,3 +104,8 @@ $data_product_category = fetchData("multiple","SELECT * FROM product_category WH
   </div>
   <?php include "footer.php"; ?>
 <script type="text/javascript" src="<?php echo BASE_URL ?>/my_js/scripts_master_barang.js"></script>
+<script type="text/javascript">
+  $(".confirm").confirm({
+    text: "Yakin akan menghapus Data?"
+  });
+</script>

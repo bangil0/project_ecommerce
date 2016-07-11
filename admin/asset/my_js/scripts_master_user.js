@@ -2,6 +2,7 @@ $(function() {
 	CKEDITOR.replace('iddescription');
 	$.initForm(function(){
 		//dalem ini isinya yg isi data tadi yg di comment di scripts.js
+		$("#id_product").val($(this).data("idproduct"));
 		$("#kode_product").val($(this).data("kodeproduct"));
 		$("#nama_product").val($(this).data("namaproduct"));
 		$("#merk_product").val($(this).data("merkproduct"));

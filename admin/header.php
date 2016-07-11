@@ -47,7 +47,7 @@
     <div class="wrapper">
 
 <header class="main-header">
-  <a href="index.php" class="logo">
+  <a href="master_product_category.php" class="logo">
     <!-- <img src="<?php echo BASE_URL ?>asset/koperasi_template/logo.jpg" width="10%"> -->
     Dashboard Admin
   </a>

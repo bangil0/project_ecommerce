@@ -100,13 +100,18 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
                         </td>
                         <?php if ($value->status=='checkout'): ?>                     
                             <td>
-                              <a href="<?php echo BASE_URL."/goo" ?>">
-                                <button class="btn btn-warning btn-flat" ><?php echo strtoupper(str_replace('_', ' ', $value->status)) ?></button>
-                              </a>
+                            <form action="<?php echo BASE_URL."/controller/control_transaksi.php" ?>" method="post">
+                                <input type="hidden" value="<?php echo $value->order_id ?>" name="order_id">                            
+                                <button class="btn btn-warning btn-flat" <?php echo empty($value->akun_bank_customer)?'disabled':'' ?> >
+                                    <?php echo strtoupper(str_replace('_', ' ', $value->status))  ?> 
+                                </button>
+                            </form>
+                              <!-- <a href="<?php echo BASE_URL."/controller/control_transaksi.php?order_id=$value->order_id" ?>"> -->
+                              <!-- </a> -->
                                   <?php if (!empty($value->akun_bank_customer)): ?>
                                         <div class="payment-notes">
                                           Account Name: <?php echo $value->akun_bank_customer ?> <br>
-                                          Rp<?php echo $value->grand_total ?><br>
+                                          Rp <?php echo $value->grand_total ?><br>
                                         </div>  
                                   <?php endif ?>
                             </td>
@@ -121,11 +126,15 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
                                             width:91.56px">
                                             <?php echo strtoupper(str_replace('_', ' ', $value->status)) ?>
                                   </span>
-                                     <div class="payment-notes">
+<!--                                      <div class="payment-notes">
                                        Bank Transfer via: BCA <br>
                                        Account Name: Michelle Renata <br>
                                        Rp35.500<br>
-                                     </div>
+                                     </div> -->
+                                     <div class="payment-notes">
+                                       Account Name: <?php echo $value->akun_bank_customer ?> <br>
+                                       Rp <?php echo $value->grand_total ?><br>
+                                     </div>  
                                  </td>
                             <?php else: ?>
                             <td>
@@ -181,8 +190,8 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
               <tr>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
-                <th class="text-right">Harga</th>
                 <th class="text-right">Qty</th>
+                <th class="text-right">Harga</th>
                 <th class="text-right">Sub Total</th>
               </tr>
             </thead>
@@ -245,6 +254,7 @@ $list_orders = fetchData('multiple',"SELECT *,tr.`created_timestamp` AS created_
                         '<td class="text-right">'+data[i].selling_price+'</td>'+
                         '<td class="text-right">'+data[i].subtotal+'</td>'+                        
                     '</tr>';
+              $('#mutasi_anggota').html("");
               $("#mutasi_anggota").append(row);     
                   };
                   $('#alamat').html(data[0].address);

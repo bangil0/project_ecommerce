@@ -5,6 +5,7 @@ include "../../config.php";
 // print_post();
 // print_r($_FILES);
 
+$id_product 		= $_POST['id_product'];
 $category_product 	= $_POST['category_product'];
 $kode_product 		= $_POST['kode_product'];
 $merk_product 		= $_POST['merk_product'];
@@ -25,9 +26,23 @@ if (isset($_POST['submit']) && $_POST['submit']=='add_product') {
 		}
 		var_dump($check_upload_file);
 	}
-		$sql_insert_product = "INSERT INTO product(id_category,kode_product,nama_product,merk,image,description_product,selling_price) 
-								VALUES('".$category_product."','".$kode_product."','".$nama_product."','".$merk_product."','".$image."','".$description_product."','".$selling_price_product."')";
-		insert_data($sql_insert_product);
+		if (!empty($id_product)) {
+			$sql_update_product = "UPDATE product SET 
+									id_category='".$category_product."',
+									kode_product='".$kode_product."',
+									nama_product='".$nama_product."',
+									merk='".$merk_product."',
+									description_product='".$description_product."',
+									selling_price='".$selling_price_product."'
+									WHERE 1
+									AND id='".$id_product."'";
+			mysql_query($sql_update_product);
+		}
+		else{		
+			$sql_insert_product = "INSERT INTO product(id_category,kode_product,nama_product,merk,image,description_product,selling_price) 
+									VALUES('".$category_product."','".$kode_product."','".$nama_product."','".$merk_product."','".$image."','".$description_product."','".$selling_price_product."')";
+			insert_data($sql_insert_product);
+		}
 }
 
 if (isset($_GET['delete_product']) && $_GET['delete_product']!='') {

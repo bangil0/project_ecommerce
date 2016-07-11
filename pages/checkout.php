@@ -183,7 +183,7 @@ unset($_SESSION['alert']);
 	          	<div id="ajax-load-courier-radio">
 	              	<div class="input-grp radio">
 	              		<label><input type="radio" name="opt-shipping" id="id-opt-shipping-0" value="JNE" checked="">
-	              		<img src="http://original.antidemo.com/order_/ajax/../../files/uploads/assets/logo-2015-10-22-22-09-33-icon-jne.png">
+	              		<img src="<?php echo $baseurl ?>images/logo-2015-10-22-22-09-33-icon-jne.png">
 	          				<div class="input-grp-select"></div>
 	              			<div class="input-grp-content">
 		              			<p class="input-grp-title"><strong>JNE Regular</strong></p>

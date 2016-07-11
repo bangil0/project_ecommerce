@@ -325,7 +325,7 @@ function validateCheckout(){
    
    if(fname == ''){
       $('#id-row-fname').addClass('has-error');
-      alert("Silahkan lengkapi DATA !");
+      alert("Masukan data secara lengkap!");
 	  $root.animate({
 	     scrollTop: $('#id-box-details').offset().top
 	  }, 500);

@@ -41,7 +41,7 @@ unset($_SESSION['alert']);
 				<div class="products-right-grid">
 					<div class="products-right-grids animated wow slideInRight" data-wow-delay=".5s">
 						<div class="sorting">
-							<select id="country" onchange="change_country(this.value)" class="frm-field required sect">
+							<select id="country" onchange="change_country(this.value)" class="frm-field required sect hidden">
 								<option value="null">Default sorting</option>
 								<option value="null">Sort by popularity</option> 
 								<option value="null">Sort by average rating</option>					
@@ -49,7 +49,7 @@ unset($_SESSION['alert']);
 							</select>
 						</div>
 						<div class="sorting-left">
-							<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+							<select id="country1" onchange="change_country(this.value)" class="frm-field required sect hidden">
 								<option value="null">Item on page 9</option>
 								<option value="null">Item on page 18</option> 
 								<option value="null">Item on page 32</option>					
@@ -103,7 +103,7 @@ unset($_SESSION['alert']);
 										</div>
 									</div>
 									<h4><a href="<?php echo BASE_URL ?>product_review.php?id_product=<?php echo $value->id ?>?id_product=<?php echo $value->id ?>"><?php echo $value->nama_product; ?></a></h4>
-									<p>Vel illum qui dolorem.</p>
+									<p><?php echo $value->merk ?></p>
 									<div class="simpleCart_shelfItem products-right-grid1-add-cart">
 									<span class="item_price">IDR <?php echo $value->selling_price ?></span>
 										<?php if ($value->qty>0): ?>										
@@ -121,7 +121,7 @@ unset($_SESSION['alert']);
 					<div class="clearfix"> </div>
 				</div>
 				<nav class="numbering animated wow slideInRight" data-wow-delay=".5s">
-				  <ul class="pagination paging">
+				  <ul class="pagination paging hidden">
 					<li>
 					  <a href="#" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>

@@ -17,10 +17,10 @@ if (isset($_GET['order_id']) && isset($_GET['report'])) {
 }
 
 if (isset($_GET['id_product']) && isset($_GET['master_product'])) {
-		echo $_GET['id_product'];
 		header("content-type:application/json");
 		$data = fetchData('multiple',"SELECT * 
 							FROM product_review pr 
+							JOIN tbl_user u ON pr.`id_user`=u.`id`
 							WHERE 1
 							AND pr.`id_product`='".$_GET['id_product']."'");
 		echo json_encode($data);

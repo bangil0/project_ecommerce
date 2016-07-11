@@ -1,5 +1,29 @@
 <?php 
-include 'config.php';
+$db_host = "localhost"; 
+$db_name = "skripsi_ecommerce";
+$db_user = "root";
+$db_pass = "";
+
+$link = @mysql_connect($db_host,$db_user,$db_pass);
+$database = mysql_select_db($db_name,$link);
+if (!$database) {
+	die(mysql_errno()."-".mysql_error());
+}
+
+function fetchData($type, $sql){
+  if($type === 'single'){
+     $query	= mysql_query($sql);
+	 $row = mysql_fetch_object($query);
+  }else if($type === 'multiple'){
+     $query	= mysql_query($sql);
+     $row	= array();
+     while($result = mysql_fetch_object($query)){
+        array_push($row, $result);
+	 }
+  }
+  return $row;
+  
+}
 
 function execute_checkout_to_cancel(){
 	$sql = "SELECT *
@@ -7,7 +31,7 @@ function execute_checkout_to_cancel(){
 			JOIN transaksi_detail td ON t.`order_id`=td.`order_id`
 			WHERE 1
 			AND t.`status`='checkout'
-			AND TIMESTAMPDIFF(SECOND,t.`checkout_timestamp`,CURRENT_TIME)>=2000";
+			AND TIMESTAMPDIFF(SECOND,t.`checkout_timestamp`,CURRENT_TIME)>=300";
 	$data_canceled = fetchData('multiple', $sql);
 	return $data_canceled;
 }

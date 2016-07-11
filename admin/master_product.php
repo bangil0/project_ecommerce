@@ -30,14 +30,6 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
         <div class="btn-group">
            <a href="#" class="btn btn-success" id="btn_addnew">Add New <i class="icon-plus icon-white"></i></a>
         </div>
-        <div class="btn-group pull-right">
-           <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
-           <ul class="dropdown-menu">
-              <li><a href="#">Print</a></li>
-              <li><a href="#">Save as PDF</a></li>
-              <li><a href="<?php echo BASE_URL ?>master_barang/TRUE">Export to Excel</a></li>
-           </ul>
-        </div>
      </div>   
     </div> 
     </div>
@@ -57,22 +49,23 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
             </select>
           </div>
         </div>
+        <input type="hidden" id="id_product" name="id_product">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Kode Product</label>
           <div class="col-sm-5">
-            <input name="kode_product" type="text" class="form-control" id="kode_product" placeholder="Nama">
+            <input name="kode_product" type="text" class="form-control" id="kode_product" placeholder="Kode Product">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Merk Product</label>
           <div class="col-sm-5">
-            <input name="merk_product" type="text" class="form-control" id="merk_product" placeholder="Nama">
+            <input name="merk_product" type="text" class="form-control" id="merk_product" placeholder="Merk Product">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Nama Product</label>
             <div class="col-sm-5">
-              <input type="text" name="nama_product" class="form-control" id="nama_product">
+              <input type="text" name="nama_product" class="form-control" id="nama_product" placeholder="Nama Product">
             </div>
         </div>
         <div class="form-group">
@@ -146,7 +139,7 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                      <?php if (isset($list_product)): ?>
                       <?php foreach ($list_product as $value) { ?>
                       <tr>                   
-                        <td><?php echo $value->id ?></td>
+                        <td><?php echo $value->kode_product ?></td>
                         <td><?php echo $value->merk ?></td>
                         <td><?php echo $value->nama_product ?></td>
                         <td><?php echo $value->name_category ?></td>
@@ -164,7 +157,8 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                         </td>
                         <td width="16%">
                           <a href="#" class="btn btn-default fa fa-edit btn-default btn_edit"
-                              data-kodeproduct="<?php echo $value->id ?>"
+                              data-idproduct="<?php echo $value->id ?>"
+                              data-kodeproduct="<?php echo $value->kode_product ?>"
                               data-namaproduct="<?php echo $value->nama_product ?>"
                               data-merkproduct="<?php echo $value->merk ?>"
                               data-sellingprice="<?php echo $value->selling_price ?>"
@@ -202,14 +196,12 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
           <table class="table table-striped" id="tblGrid">
             <thead id="tblHead">
               <tr>
-                <th>Kode Barang</th>
-                <th>Nama Barang</th>
-                <th class="text-right">Harga</th>
-                <th class="text-right">Qty</th>
-                <th class="text-right">Sub Total</th>
+                <th width="25%">Created Time</th>
+                <th width="25%">Nama Customer</th>
+                <th class="text-left">Review / Testimoni</th>
               </tr>
             </thead>
-            <tbody id="mutasi_anggota">
+            <tbody id="list_testimoni">
               
             </tbody>
             <tfoot>
@@ -263,13 +255,13 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
   <script type="text/javascript">
     $(document).ready(function(){
         $(".confirm").confirm({
-          text: "Are you sure you want to delete that comment?"
+          text: "Yakin akan menghapus Data?"
         });
         $(function(){
 
           $("#example1").on('click','.view-detail',function(){
             var id_product = $(this).val();
-            // $("#mutasi_anggota").html("");
+            // $("#list_testimoni").html("");
             $("#myModal").modal('show');
                 $.ajax({
                     url:"controller/control_json.php?master_product",
@@ -279,28 +271,17 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
                       console.log(data);
                       console.log(data.length);
                     // $("#title_shu").html(data['result'][0]['nama']);
+                    $('#list_testimoni').html("");
                     if (data.length>0){
                         for (var i =0 ; i < data.length; i++) {
                           var row='<tr>'+
-                              '<td>'+data[i].product_id+'</td>'+
-                              '<td>'+data[i].nama_product+'</td>'+
-                              '<td class="text-right">'+data[i].qty+'</td>'+
-                              '<td class="text-right">'+data[i].selling_price+'</td>'+
-                              '<td class="text-right">'+data[i].subtotal+'</td>'+                        
+                              '<td>'+data[i].created_timestamp+'</td>'+
+                              '<td>'+data[i].first_name+'</td>'+
+                              '<td class="text-left">'+data[i].review_detail+'</td>'+                  
                           '</tr>';
-                    $("#mutasi_anggota").append(row);     
+                    $("#list_testimoni").append(row);     
                         };
-                        $('#alamat').html(data[0].address);
-                        $('#order_id').html(data[0].order_id);
-                        $('#tanggal_transaksi').html(data[0].created_transaksi);
-                        $('#pelanggan').html(data[0].first_name);
-                      $('#total').html('Rp '+data[0].total_belanja);
-                      $('#ppn').html('Rp '+data[0].total_shipping);
-                      $('#grand_total').html('Rp '+data[0].grand_total);
-
-                      
                       $("#myModal").modal('show');
-                    // showModalDialog($("#myModal"));
                     };
                   }
               });
@@ -308,12 +289,4 @@ $list_product = fetchData('multiple',"SELECT pr.*,pc.`name_category` FROM produc
         });
 
     });
-    //   $(".btn_edit").click(function(event) {
-    //        CKEDITOR.remove(CKEDITOR.instances.iddescription);
-    //       // CKEDITOR.instances.iddescription.destroy();
-    //       $("#iddescription").text("sam");
-    //       CKEDITOR.replace('iddescription');
-    //   });  
-    // });
-
   </script>
