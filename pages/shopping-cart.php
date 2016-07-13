@@ -6,9 +6,12 @@ include "../header.php";
 show_alert($_SESSION['alert']['type'], $_SESSION['alert']['msg']);
 unset($_SESSION['alert']);
 ?>
-
+<input type="hidden" value="<?php echo $baseurl ?>" id="base_url">
+<script type="text/javascript">
+	var base_url = $('#base_url').val();
+</script>
 <!-- cart -->
-	<script src="<?php echo $baseurl?>js/simpleCart.min.js"> </script>
+<script src="<?php echo $baseurl?>js/simpleCart.min.js"> </script>
 <!-- cart -->
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 
@@ -82,7 +85,7 @@ unset($_SESSION['alert']);
 															data:{product_id:product_remove,status:'remove_product'},
 														      success: function(data){
 														        console.log(data);
-
+														        window.location.href = base_url+'pages/shopping-cart.php';
 														      }
 														    });
 														$('.rem<?php echo $value['product_id'] ?>').fadeOut('slow', function(c){
@@ -112,6 +115,7 @@ unset($_SESSION['alert']);
 												data:{product_id:product_id,qty:'1',status:'add_product'},
 											    success: function(data){
 											        console.log(data);
+											        window.location.href = base_url+'pages/shopping-cart.php';
 
 										      }
 									    });
@@ -128,7 +132,7 @@ unset($_SESSION['alert']);
 												data:{product_id:product_id,qty:'1'},
 											    success: function(data){
 											        console.log(data);
-
+											        window.location.href = base_url+'pages/shopping-cart.php';
 										      }
 										    });
 									});
@@ -138,7 +142,7 @@ unset($_SESSION['alert']);
 			</div>
 			<div class="checkout-left">	
 				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-					<h4>Continue to basket</h4>
+					<a href="<?php echo $baseurl ?>product.php"><h4>Continue to basket</h4></a>
 					<ul>
 					<?php if (!empty($_SESSION['cart'])): ?>
 								<?php $grandTotal = 0; ?>
